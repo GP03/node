@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("jquery", "1.4.4");</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            var socketio = io.connect();
+            // サーバからのイベント'msg'を受信する
+            socketio.on('msg', function(data) {
+                if(data.user=="sp"){
+                    $("#code").append(data.use+"<br />");
+                }
+            });
+            $('.use').click(function(){
+                socketio.emit('others', {
+                    user: "main",
+                    use:$(this).text()
+                });
+                socketio.send("admin");
+            });
+            $('#a').click(function(){
+                socketio.emit('others', {
+                    user: "admin",
+                    use:"デバイスからのコール"
+                });
+                socketio.send("admin");
+            });
+            $('#m').click(function(){
+                socketio.emit('others', {
+                    user: "main",
+                    use:"デバイスからのコール"
+                });
+                socketio.send("admin");
+            });
+            socketio.on('msg', function(data) {
+                console.log(data);
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>デバイス</h1>
+<button id="a">管理コール</button>
+<button id="m">メインコール</button>
+<hr>
+<button class="use">冒頭</button>
+<button class="use">SOS機能</button>
+<button class="use">忘れ物機能</button>
+<button class="use">翻訳機能</button>
+<button class="use">薬自動投与</button>
+<button class="use">健康確認</button>
+<button class="use">食事</button>
+<hr>
+<pre id="code" />
+</body>
+</html>

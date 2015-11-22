@@ -1,0 +1,100 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("jquery", "1.4.4");</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="/jquery.xdomainajax.js"></script>
+<script src="main/js/Client.js"></script>
+<script type="text/javascript">
+    $(function() {
+      var socketio = io.connect();
+      // サーバからのイベント'msg'を受信する
+      socketio.on('msg', function(data) {
+          if(data.user=="main"){
+              $("#code").append(data.use+"<br />");
+              if(data.use=="SOS機能"){
+                  document.location.href = "/sos";
+              }
+              else  if(data.use=="忘れ物機能"){
+                  document.location.href = "/wasuremono";
+              }
+              else  if(data.use=="翻訳機能"){
+                  document.location.href = "/honyaku";
+              }
+          }
+      });
+        $('#a').click(function(){
+           deviceCallStart("メインからのコール");
+        });
+
+        $('#b').click(function(){
+            adminCallStart("メインからのコール");
+        });
+//        データ送信
+        $('#aaa').click(function() {
+//            var f = $(this);
+//            $.ajax({
+//                type:"GET",
+//                data: "?kinou=0",
+//                timeout: 10000,
+//                async: false,
+//                cache: false,
+//            })
+//                    .done(function( data ) {
+//                        // 通信が成功したときの処理
+//                        console.log(data);
+//                    })
+//                    .fail(function( data ) {
+//                        // 通信が失敗したときの処理
+//                    })
+//                    .always(function( data ) {
+//                        // 通信が完了したとき
+//                        alert(data);
+//                    });
+//            });
+
+
+            $.ajax({
+                type: "GET",//デフォルトだが必須だと考える。
+                url: "http://localhost:8080/fileW.php?kinou=0",
+                async: false,
+                cache: false,
+                error: function () {
+                    alert("ロード失敗");
+                },
+                success: function (xml) {
+                    alert("成功");
+                }
+            })
+        });
+
+
+           socketio.on('msg', function(data) {
+            console.log(data);
+        });
+    });
+</script>
+<h1>メイン進行</h1>
+<!--<textarea id="code"></textarea>-->
+<button id="a">デバイスコール</button>
+<button id="b">管理コール</button>
+<hr>
+<form action="" method="GET" onsubmit="doSomething();return false;">
+<select name="kinou">
+    <option value="0"> - </option>
+    <option value="1"> SOS機能 </option>
+    <option value="2"> 翻訳機能 </option>
+    <option value="3"> 忘れ物機能 </option>
+</select>
+    <button type="submit">追加</button>
+</form>
+<button id="aaa">追加</button>
+<hr>
+<pre id="code" />
+</body>
+</html>

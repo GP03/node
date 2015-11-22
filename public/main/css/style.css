@@ -1,0 +1,176 @@
+body{
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-size:cover;
+}
+.fc {
+    color: red;
+}
+.jumbotron {
+    padding-top: 30%;
+}
+
+.jumbotron.top {
+    overflow: hidden;
+    height: auto;
+}
+
+p.val {
+    margin-bottom: 15px;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.messageView {
+    position: relative;
+    bottom 10%;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    cursor: pointer
+}
+
+.messageView .mv-contents {
+    padding: 5pc 0 0
+}
+
+.messageView .mv-contents .mv-name p {
+    position: absolute;
+    top: 50px;
+    left: -40px;
+    width: 350px;
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
+    text-shadow: #000 1px 1px 1px;
+    text-shadow: #000 1px 1px 3px 1px;
+    z-index: 20
+}
+
+.blue {
+    background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(.1, rgba(47, 109, 174, .8)), color-stop(.9, rgba(47, 109, 174, .8)), to(rgba(0, 0, 0, 0)));
+}
+
+.green {
+    background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(.1, rgba(60, 179, 113, .8)), color-stop(.9, rgba(60, 179, 113, .8)), to(rgba(0, 0, 0, 0)));
+}
+
+.red {
+    background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(.1, rgba(204, 0, 0, .8)), color-stop(.9, rgba(204, 0, 0, .8)), to(rgba(0, 0, 0, 0)));
+}
+
+.orange {
+    background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(.1, rgba(255, 140, 0, .8)), color-stop(.9, rgba(255, 140, 0, .8)), to(rgba(0, 0, 0, 0)));
+}
+
+.purple {
+    background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(.1, rgba(139, 0, 139, .8)), color-stop(.9, rgba(139, 0, 139, .8)), to(rgba(0, 0, 0, 0)));
+}
+
+.glay {
+    background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(.1, rgba(128, 128, 128, .8)), color-stop(.9, rgba(128, 128, 128, .8)), to(rgba(0, 0, 0, 0)));
+}
+
+.messageView .mv-contents .mv-comment {
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 40px;
+    height: 260px;
+    padding: 20px 30px 10px;
+    background: #fff;
+    border-radius: 8px;
+    border: solid 3px #666;
+    color: #000;
+    z-index: 10
+}
+
+.messageView .mv-contents .character img {
+    display: block;
+    width: 450px
+}
+
+.messageView .mv-contents .mv-comment .pointer {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    width: 20px;
+    height: 34px;
+    background: url(../img/icon_pointer.png) no-repeat;
+    -moz-background-size: 20px auto;
+    -o-background-size: 20px auto;
+    -webkit-background-size: 20px auto;
+    background-size: 20px auto;
+    -moz-animation: pointer-anime 1s ease-in infinite;
+    -webkit-animation: pointer-anime 1s ease-in infinite;
+    animation: pointer-anime 1s ease-in infinite
+}
+
+@-webkit-keyframes pointer-anime {
+    0% {
+        -moz-transform: translate3d(0, 0, 0) scale(1);
+        -ms-transform: translate3d(0, 0, 0) scale(1);
+        -webkit-transform: translate3d(0, 0, 0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0
+    }
+    0.1% {
+        -moz-transform: translate3d(0, -18px, 0) scale(1.1);
+        -ms-transform: translate3d(0, -18px, 0) scale(1.1);
+        -webkit-transform: translate3d(0, -18px, 0) scale(1.1);
+        transform: translate3d(0, -18px, 0) scale(1.1);
+        opacity: 0
+    }
+    30%,
+    50%,
+    94% {
+        -moz-transform: translate3d(0, 0, 0) scale(1);
+        -ms-transform: translate3d(0, 0, 0) scale(1);
+        -webkit-transform: translate3d(0, 0, 0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 1
+    }
+    40% {
+        -moz-transform: translate3d(0, -4px, 0) scale(1);
+        -ms-transform: translate3d(0, -4px, 0) scale(1);
+        -webkit-transform: translate3d(0, -4px, 0) scale(1);
+        transform: translate3d(0, -4px, 0) scale(1);
+        opacity: 1
+    }
+    100% {
+        -moz-transform: translate3d(0, 0, 0) scale(1);
+        -ms-transform: translate3d(0, 0, 0) scale(1);
+        -webkit-transform: translate3d(0, 0, 0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0
+    }
+}
+
+.character {
+    position: absolute;
+    top: -400px;
+    z-index: 1
+}
+
+.left p {
+    left: 40px;
+}
+
+.left_top p {
+    left: 40px;
+    top: -600px;
+}
+
+.center p {
+    right: auto;
+    left: 50%;
+    margin-left: -225px;
+}
+
+.right p {
+    right: 40px;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("jquery", "1.4.4");</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            var socketio = io.connect();
+            // サーバからのイベント'msg'を受信する
+            socketio.on('msg', function(data) {
+                if(data.user=="admin"){
+                    $("#code").append(data.use+"<br />");
+                }
+            });
+            $('#d').click(function(){
+                socketio.emit('others', {
+                    user: "sp",
+                    use:"管理からのコール"
+                });
+                socketio.send("admin");
+            });
+            $('#m').click(function(){
+                socketio.emit('others', {
+                    user: "main",
+                    use:"管理からのコール"
+                });
+                socketio.send("admin");
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>管理</h1>
+<button id="d">デバイスコール</button>
+<button id="m">メインコール</button>
+<hr>
+<pre id="code" />
+</body>
+</html>

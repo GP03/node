@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("jquery", "1.4.4");</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="main/js/Client.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('html').keyup(function(e){
+                switch(e.which){
+                    case 81: // Key[q]
+                        alert("管理ページ＋デバイス画面に同期");
+                        deviceAddFunc("SOS機能","sos");
+                        break;
+                    case 87: // Key[w]
+                        deviceAddFunc("忘れ物機能","wasuremono");
+                        break;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>デバイス</h1>
+<button id="a">管理コール</button>
+<button id="m">メインコール</button>
+<hr>
+<button class="use">SOS機能 q</button>
+<button class="use">忘れ物機能 w</button>
+<button class="use">翻訳機能</button>
+<button class="use">薬自動投与</button>
+<button class="use">健康確認</button>
+<button class="use">食事</button>
+<hr>
+<pre id="code" />
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>MessageView.js</title>
+    <link href="main/css/reset.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="main/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="main/css/animate.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="main/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="main/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="main/js/jquery.js"></script>
+    <script src="main/js/message_view.js" type="text/javascript"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+                /*
+
+                animate_move に動きのclass
+                infinite tru　でループ、false でループ無効
+
+                animate_moveを引き継いでしまう　animate_move="";で無効化 
+                side_classを引き継いでしまう　side_class="";で無効化
+
+
+                 */
+                var message = new MessageViewer({
+                    "data": [{
+                            "side_class": "center",
+                            "name": "ちはる",
+                            "name_color": "green",
+                            "message": "携帯電話、財布などをうっかり忘れてしまったことなどはありませんか？",
+                            "img_url": "main/img/s1.png",
+                            "animate_move": "pulse",
+                            "infinite": true,
+                            //"side_class2": "center",Station.png
+                            //"img_url2": "main/img/character_0003.png",
+                            //"animate_move2": "pulse",
+                            //"infinite2": true
+                    },
+                        {
+                            "side_class": "center",
+                            "name": "ちはる",
+                            "name_color": "green",
+                            "message": "ひろしさんもそのような自体に陥っているようですよ。",
+                            "img_url": "main/img/s1.png",
+                            "animate_move": "bounce",
+                            "infinite": true
+                             },
+                        {
+                            "side_class": "left",
+                            "name": "ひろし",
+                            "name_color": "blue",
+                            "message": "何か忘れてる気がする・・・",
+                            "img_url": "main/img/wasuremono/aaaa.png",
+                            "animate_move": "pulse",
+                            "infinite": true
+                             },
+                        {
+                            "side_class": "left",
+                            "name": "ひろし",
+                            "name_color": "blue",
+                            "message": "何じゃ何じゃ！？口の中が揺れておるぞ！？",
+                            "img_url": "main/img/wasuremono/pose_shock_ojiisan.png",
+                            "animate_move": "shake",
+                            "infinite": true
+                             },
+                        {
+                            "side_class": "left",
+                            "name": "トゥースマン",
+                            "name_color": "red",
+                            "message": "忘れ物機能の通知ではないか！ひろし！",
+                            "img_url": "main/img/orange_arrow.png",
+                            "animate_move": "flash",
+                            "infinite": true,
+                            "side_class2": "center",
+                            "img_url2": "main/img/tyu-sumann.png",
+                            "animate_move2": "bounceInDown",
+                            "infinite2": false,
+                            "side_class3": "right",
+                            "img_url3": "main/img/blue_arrow.png",
+                            "animate_move3": "flash",
+                            "infinite3": true
+                             },
+                        {
+                            "side_class": "left",
+                            "name":"ひろし",
+                            "name_color": "blue",
+                            "message": "今すぐとりに戻らないと",
+                            "img_url": "main/img/wasuremono/hashiru_J.png",
+                            "animate_move": "shake",
+                            "infinite": true,
+                            // "side_class2": "right",
+                            // "img_url2": "main/img/orange_arrow.png",
+                            // "animate_move2": "flash",
+                            // "infinite2": true
+                            },
+                        {
+                            "side_class": "center",
+                            "name":"トゥースマン",
+                            "name_color": "red",
+                            "message": "GPS機能で忘れ物の場所もバッチリじゃ！",
+                            "img_url": "main/img/wasuremono/hashiru_J.png",
+                            "animate_move": "",
+                            "infinite": false,
+                            "side_class2": "right",
+                            "img_url2": "main/img/tyu-sumann.png",
+                            "animate_move2": "pulse",
+                            "infinite2": true,
+                            "side_class3": "left",
+                            "img_url3": "main/img/orange_arrow.png",
+                            "animate_move3": "flash",
+                            "infinite3": true
+                            },
+                        {
+                            "side_class": "left",
+                            "name":"ひろし",
+                            "name_color": "blue",
+                            "message": "助かった〜",
+                            "img_url": "main/img/wasuremono/pose_anshin_ojiisan.png",
+                            "animate_move": "pulse",
+                            "infinite": true,
+                            // "side_class2": "right",
+                            // "img_url2": "main/img/orange_arrow.png",
+                            // "animate_move2": "flash",
+                            // "infinite2": true
+                    },
+                        {
+
+                            "side_class": "left",
+                            "name":"ちはる",
+                            "name_color": "green",
+                            "message": "危ないところでしたね！グローバルトゥースが無ければ財布を忘れてしまうところでした。",
+                            "img_url": "main/img/wasuremono/pose_anshin_ojiisan.png",
+                            "animate_move": "",
+                            "infinite": true,
+                            "side_class2": "right",
+                            "img_url2": "main/img/s1.png",
+                            "animate_move2": "pulse",
+                            "infinite2": true
+                    },
+                    {
+                            "side_class": "left",
+                            "name":"ちはる",
+                            "name_color": "green",
+                            "message": "この機能があれば海外でのトラブルも少なくなり海外に行く時も安心して過ごせるでしょうね！",
+                            "img_url": "main/img/wasuremono/pose_anshin_ojiisan.png",
+                            "animate_move": "",
+                            "infinite": true,
+                            "side_class2": "right",
+                            "img_url2": "main/img/s1.png",
+                            "animate_move2": "pulse",
+                            "infinite2": true 
+                    }],
+                    "option": {
+                        "loop": true
+                    }
+                });
+            },
+            false);
+    </script>
+</head>
+
+
+
+
+<body style="background-image: url(main/img/wasuremono/Station.png);">
+    <section id="sample" class="sample001">
+        <div class="jumbotron top">
+            <div class="messageView" id="default">
+                <div class="mv-contents">
+                    <div class="mv-name">
+                        <p class=""></p>
+                    </div>
+                    <div class="mv-comment">
+                        <p class="val"></p>
+                        <p class="pointer"></p>
+                    </div>
+                    <div id="first">
+                        <p class="mv-image character"><img src="" alt="" /></p>
+                    </div>
+                    <div id="second">
+                        <p class="mv-image2 character"><img src="" alt="" /></p>
+                    </div>
+                    <div id="third">
+                        <p class="mv-image3 character"><img src="" alt="" /></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="main/js/Client.js"></script>
+<script>
+//    -------同期メモ------
+//    ５ページ目（配列で４番）
+//    ・管理ページ＋デバイス画面に同期
+//
+//    ７ページ目（配列で６番）
+//    ・デバイス画面に同期
+//    --------------------
+    $(function(){
+        $('html').keyup(function(e){
+            switch(e.which){
+                case 39: // Key[→]
+                    console.log(getNumPage());
+                    if(getNumPage()==4){
+                        alert("管理ページ＋デバイス画面に同期");
+                        adminCallStart("管理ページ");
+                        deviceCallStart("デバイス画面に同期");
+                    }
+                    else if(getNumPage()==6){
+                        alert("デバイス画面に同期");
+                        deviceCallStart("デバイス画面に同期");
+                    }
+                    break;
+                case 37: // Key[←]
+                    console.log(getNumPage());
+                    break;
+            }
+        });
+    });
+</script>
+</html>
