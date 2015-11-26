@@ -42,14 +42,6 @@ function deviceCallStart(scene,data){
     });
 };
 
-//機能追加
-function deviceAddFunc(name,url){
-    socketio.emit('others', {
-        user: "spAdd",
-        funcName:name,
-        url:url
-    });
-};
 
 //管理画面をコール
 function adminCallStart(data){

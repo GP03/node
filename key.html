@@ -8,9 +8,10 @@
 <script type="text/javascript">google.load("jquery", "1.4.4");</script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="main/js/Client.js"></script>
     <script type="text/javascript">
         $(function() {
+            var socketio = io.connect();
+
             $('html').keyup(function(e){
                 switch(e.which){
                     case 81: // Key[q]
@@ -26,16 +27,27 @@
                         deviceAddFunc("薬自動投与","kusuri");
                         break;
                     case 84: // Key[t]
-                        deviceAddFunc("健康確認","sos");
+                        deviceAddFunc("健康確認","kenkoukanri");
                         break;
                     case 89: // Key[y]
                         deviceAddFunc("食事","shokuji");
                         break;
                     case 85: // Key[u]
-                        deviceAddFunc("食事","shokuji");
+                        deviceAddFunc("決済","kessai");
                         break;
                 }
             });
+
+
+            //機能追加
+            function deviceAddFunc(name,url){
+                socketio.emit('others', {
+                    user: "spAdd",
+                    funcName:name,
+                    url:url
+                });
+            };
+
         });
     </script>
 </head>
