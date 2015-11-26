@@ -4,43 +4,42 @@
 
 var socketio = io.connect();
 // サーバからのイベント'msg'を受信する
-socketio.on('msg', function(data) {
+socketio.on('pageIn', function(data) {
     if(data.user=="main"){
         $("#code").append(data.use+"<br />");
-        if(data.use=="SOS機能"){
+        if(data.use=="sos"){
             document.location.href = "/sos";
         }
-        else  if(data.use=="忘れ物機能"){
+        else  if(data.use=="wasuremono"){
             document.location.href = "/wasuremono";
         }
-        else  if(data.use=="翻訳機能"){
+        else  if(data.use=="honyaku"){
             document.location.href = "/honyaku";
         }
-        else  if(data.use=="薬自動投与"){
+        else  if(data.use=="kusuri"){
             document.location.href = "/kusuri";
         }
-        else  if(data.use=="健康確認"){
+        else  if(data.use=="kenkoukanri"){
             document.location.href = "/kenkoukanri";
         }
-        else  if(data.use=="冒頭"){
+        else  if(data.use=="boutou"){
             document.location.href = "/boutou";
         }
-        else  if(data.use=="食事"){
+        else  if(data.use=="shokuji"){
             document.location.href = "/shokuji";
         }
-        else  if(data.use=="決済"){
+        else  if(data.use=="kessai"){
             document.location.href = "/kessai";
         }
     }
 });
 
 //デバイスをコール
-function deviceCallStart(data){
+function deviceCallStart(scene,data){
     socketio.emit('others', {
-        user: "sp",
+        user: scene,
         url:data
     });
-    socketio.send("sp");
 };
 
 //機能追加
@@ -50,7 +49,6 @@ function deviceAddFunc(name,url){
         funcName:name,
         url:url
     });
-    socketio.send("sp");
 };
 
 //管理画面をコール
@@ -59,7 +57,6 @@ function adminCallStart(data){
         user: "admin",
         use:data
     });
-    socketio.send("admin");
 };
 
 //メインをコール
@@ -68,5 +65,4 @@ function mainCallStart(data){
         user: "main",
         use:data
     });
-    socketio.send("main");
 };

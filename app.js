@@ -1,5 +1,4 @@
 // インポート
-//express-sample/app.js
 var express = require('express');
 var app = express();
 var fs = require("fs");
@@ -71,12 +70,16 @@ io.sockets.on("connection", function (client) {
         client.broadcast.emit('msg', data);
         //io.sockets.emit('msg', data);
     });
+    client.on('pageIn', function(data) {
+        console.log(data);
+        client.broadcast.emit('pageIn', data);
+    });
     client.on('disconnect', function() {
         console.log('disconnect');
     });
-    client.on("message", function(a) {
-    // 送った自身以外のクライアントへsend
-    console.log(a);
-    client.broadcast.send("きたか？ーーーーーー");
-  });
+  //  client.on("message", function(a) {
+  //  // 送った自身以外のクライアントへsend
+  //  console.log(a);
+  //  client.broadcast.send("きたか？ーーーーーー");
+  //});
 });

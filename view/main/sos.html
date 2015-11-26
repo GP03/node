@@ -151,7 +151,11 @@
                     console.log(getNumPage());
                     if(getNumPage()==2){
                         adminCallStart("管理ページ");
-                        deviceCallStart("spAlert");
+                        deviceCallStart("sos","alert");
+                    }
+                    if(getNumPage()==4){
+                        adminCallStart("管理ページ");
+                        deviceCallStart("sos","alertEnd");
                     }
                     break;
                 case 37: // Key[←]
